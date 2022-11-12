@@ -1,0 +1,19 @@
+CREATE TABLE cabinets (id INTEGER PRIMARY KEY, name TEXT, quantity integer, location integer, price integer);
+
+INSERT INTO cabinets VALUES (1, "HINGES", 25, 15, 2.28);
+INSERT INTO cabinets VALUES (2, "15in Glides", 20, 15, 14.48);
+INSERT INTO cabinets VALUES (3, "18in Glides", 19, 15, 14.99);
+INSERT INTO cabinets VALUES (4, "21in Glides", 17, 15, 16.49);
+INSERT INTO cabinets VALUES (5, ".625 screws", 1000, 15, 2.48);
+INSERT INTO cabinets VALUES (6, ".75 screws", 1000, 15, 2.99);
+INSERT INTO cabinets VALUES (7, "1.25 pocket screws", 900, 15, 21.99);
+INSERT INTO cabinets VALUES (8, "1.50 pocket screws", 900, 15, 22.99);
+INSERT INTO cabinets VALUES (9, "Back plate", 250, 17, .91);
+INSERT INTO cabinets VALUES (10, "pulls", 100, 17, 4.99);
+INSERT INTO cabinets VALUES (11, "handles", 100, 17, 8.99);
+INSERT INTO cabinets VALUES (12, "Wall Cabinet", 10, 21, 115.00);
+INSERT INTO cabinets VALUES (13, "Base Cabinet", 10, 21, 125.00);
+INSERT INTO cabinets VALUES (14, "Full Height Cabinet", 4, 21, 225.00);
+INSERT INTO cabinets VALUES (15, "Extended Wall Cabinet", 4, 21, 175.00);
+
+SELECT * FROM cabinets group by price 
