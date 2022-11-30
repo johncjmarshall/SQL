@@ -1,0 +1,128 @@
+CREATE TABLE Famous_People (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname TEXT);
+
+INSERT into famous_people (fullname) VALUES ("Garth Brooks");
+INSERT into famous_people (fullname) VALUES ("Trisha Yearwood");
+INSERT into famous_people (fullname) VALUES ("Gwen Stafani");
+INSERT into famous_people (fullname) VALUES ("Blake Shelton");
+INSERT into famous_people (fullname) VALUES ("John Wayne");
+INSERT into famous_people (fullname) VALUES ("Steve Carell");
+INSERT into famous_people (fullname) VALUES ("Jennifer Lopez");
+INSERT into famous_people (fullname) VALUES ("Ben Affleck");
+INSERT into famous_people (fullname) VALUES ("William Shakespeare");
+INSERT into famous_people (fullname) VALUES ("Stephen Covey");
+INSERT into famous_people (fullname) VALUES ("Bill North");
+INSERT into famous_people (fullname) VALUES ("RC Sproul");
+
+CREATE TABLE actor (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id INTEGER,
+    movies TEXT);
+
+INSERT into actor (person_id, movies) VALUES (5, "Baby Face");
+INSERT into actor (person_id, movies) VALUES (5, "Riders of Destiny");
+INSERT into actor (person_id, movies) VALUES (5, "The Oregon Trail");
+INSERT into actor (person_id, movies) VALUES (6, "Evan Almighty");
+INSERT into actor (person_id, movies) VALUES (6, "The 40 Year Old Virgin");
+INSERT into actor (person_id, movies) VALUES (6, "Dinner for Schmucks");
+INSERT into actor (person_id, movies) VALUES (7, "La Bamba");
+INSERT into actor (person_id, movies) VALUES (7, "Salena");
+INSERT into actor (person_id, movies) VALUES (7, "Anaconda");
+INSERT into actor (person_id, movies) VALUES (8, "The Accountant");
+INSERT into actor (person_id, movies) VALUES (8, "Dazed and Confused");
+INSERT into actor (person_id, movies) VALUES (8, "Good Will Hunting");
+
+CREATE TABLE Singers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id INTEGER,
+    songs TEXT);
+
+INSERT into singers (person_id, songs) VALUES (1, "The Dance");
+INSERT into singers (person_id, songs) VALUES (2, "She's In Love With The Boy");
+INSERT into singers (person_id, songs) VALUES (3, "Don't Speak");
+INSERT into singers (person_id, songs) VALUES (4, "Austin");
+
+CREATE TABLE Authors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id INTEGER,
+    books TEXT);
+
+INSERT into authors (person_id, books) VALUES (9, "Hamlet");
+INSERT into authors (person_id, books) VALUES (9, "Macbeth");
+INSERT into authors (person_id, books) VALUES (9, "Romeo and Juliet");
+INSERT into authors (person_id, books) VALUES (10, "7 Habits");
+INSERT into authors (person_id, books) VALUES (10, "First Things First");
+INSERT into authors (person_id, books) VALUES (10, "Principle Cenered Leadership");
+INSERT into authors (person_id, books) VALUES (11, "The Bermuda Quadrangle");
+INSERT into authors (person_id, books) VALUES (11, "A Bad Year for the Chickens");
+INSERT into authors (person_id, books) VALUES (11, "Blab! A Retrospective");
+INSERT into authors (person_id, books) VALUES (12, "The Holiness of God");
+INSERT into authors (person_id, books) VALUES (12, "Knowledge Scripture");
+INSERT into authors (person_id, books) VALUES (12, "Now, That's a Good Question");
+
+/* created table in error but leaving for learning purposes
+CREATE TABLE Married (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    married1 INTEGER,
+    married2 INTEGER);
+    
+INSERT INTO married (married1) VALUES ("1");
+INSERT INTO married (married1) VALUES ("2");
+INSERT INTO married (married1) VALUES ("3");
+INSERT INTO married (married1) VALUES ("4");
+INSERT INTO married (married1) VALUES ("7");
+INSERT INTO married (married1) VALUES ("8");
+
+*/
+
+CREATE TABLE Spouse (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    spouse1_id INTEGER,
+    spouse2_id INTEGER);
+    
+INSERT INTO spouse (spouse1_id, spouse2_id) VALUES (1,2);
+INSERT INTO spouse (spouse1_id, spouse2_id) VALUES (3,4);
+INSERT INTO spouse (spouse1_id, spouse2_id) VALUES (7,8);
+
+
+/* select famous people */
+SELECT famous_people.id as "ID", famous_people.fullname as "Famous Person" 
+    FROM famous_people;
+    
+/* famous people married to each other - not sure of many movies stars married to each other ! :-) */    
+
+SELECT a.fullname as "Spouse 1", b.fullname as "Spouse 2" from spouse 
+    JOIN famous_people a
+    ON spouse.spouse1_id = a.id
+    JOIN famous_people b
+    ON spouse.spouse2_id=b.id;
+
+/* select from authors */
+SELECT authors.books as "Book", famous_people.fullname as "Author" 
+    FROM authors
+    JOIN famous_people
+    ON person_id=famous_people.id
+    GROUP by books;
+    
+/* select from authors sorted by author */
+SELECT famous_people.fullname as "Author", authors.books as "Book" 
+    FROM famous_people
+    JOIN authors
+    ON person_id=famous_people.id;
+    
+/* singers and their songs*/
+
+SELECT famous_people.fullname as "Singer", singers.songs as "Song"
+    from famous_people
+    JOIN singers
+    on person_id=famous_people.id;
+    
+/* actors and their movies in alpha order by actor*/
+
+SELECT famous_people.fullname as "Actor", actor.movies as "Movie"
+    from famous_people
+    JOIN actor
+    on person_id=famous_people.id
+    ORDER by fullname;
+    
