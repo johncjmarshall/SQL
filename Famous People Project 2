@@ -1,0 +1,123 @@
+/* Create table about the people and what they do here */
+-- Table for famous people
+CREATE TABLE famous_people (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    category TEXT
+);
+
+-- Adding famous married couples
+INSERT INTO famous_people (name, category) VALUES
+    ('Jay-Z and Beyoncé', 'Married Couple'),
+    ('David Beckham and Victoria Beckham', 'Married Couple'),
+    ('Blake Shelton and Gwen Stefani', 'Married Couple'),
+    ('Tom Brady and Gisele Bündchen', 'Married Couple'),
+    ('Justin Timberlake and Jessica Biel', 'Married Couple');
+
+-- Adding movie stars
+INSERT INTO famous_people (name, category) VALUES
+    ('Leonardo DiCaprio', 'Movie Star'),
+    ('Tom Hanks', 'Movie Star'),
+    ('Angelina Jolie', 'Movie Star'),
+    ('Jennifer Lawrence', 'Movie Star'),
+    ('Will Smith', 'Movie Star');
+
+-- Table for movies
+CREATE TABLE movies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT,
+    actor_id INTEGER,
+    FOREIGN KEY (actor_id) REFERENCES famous_people(id)
+);
+
+-- Adding movies for each movie star
+INSERT INTO movies (title, actor_id) VALUES
+    ('Inception', 1),
+    ('The Titanic', 1),
+    ('Forrest Gump', 2),
+    ('Cast Away', 2),
+    ('Mr. & Mrs. Smith', 3),
+    ('Lara Croft: Tomb Raider', 3),
+    ('The Hunger Games', 4),
+    ('Silver Linings Playbook', 4),
+    ('Men in Black', 5),
+    ('Independence Day', 5);
+
+-- Table for singers
+CREATE TABLE singers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    origin TEXT,
+    FOREIGN KEY (id) REFERENCES famous_people(id)
+);
+
+-- Adding singers and their origins
+INSERT INTO singers (name, origin) VALUES
+    ('Beyoncé', 'USA'),
+    ('Blake Shelton', 'USA'),
+    ('Gwen Stefani', 'USA'),
+    ('Ed Sheeran', 'UK'),
+    ('Adele', 'UK');
+
+-- Table for songs
+CREATE TABLE songs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT,
+    singer_id INTEGER,
+    FOREIGN KEY (singer_id) REFERENCES singers(id)
+);
+
+-- Adding songs for each singer
+INSERT INTO songs (title, singer_id) VALUES
+    ('Single Ladies', 1),
+    ('God Gave Me You', 2),
+    ('Hollaback Girl', 3),
+    ('Shape of You', 4),
+    ('Someone Like You', 5);
+
+-- Table for authors
+CREATE TABLE authors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    FOREIGN KEY (id) REFERENCES famous_people(id)
+);
+
+-- Adding authors
+INSERT INTO authors (name) VALUES
+    ('J.K. Rowling'),
+    ('Stephen King'),
+    ('Agatha Christie'),
+    ('George R.R. Martin'),
+    ('Harper Lee');
+
+-- Table for books
+CREATE TABLE books (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT,
+    author_id INTEGER,
+    FOREIGN KEY (author_id) REFERENCES authors(id)
+);
+
+-- Adding books for each author
+INSERT INTO books (title, author_id) VALUES
+    ('Harry Potter and the Philosopher''s Stone', 1),
+    ('The Shining', 2),
+    ('Murder on the Orient Express', 3),
+    ('A Game of Thrones', 4),
+    ('To Kill a Mockingbird', 5);
+
+-- Table for fictional characters
+CREATE TABLE fictional_characters (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    movie_id INTEGER,
+    FOREIGN KEY (movie_id) REFERENCES movies(id)
+);
+
+-- Adding fictional characters and their movie appearances
+INSERT INTO fictional_characters (name, movie_id) VALUES
+    ('Jack Dawson', 2),
+    ('Forrest Gump', 3),
+    ('Lara Croft', 6),
+    ('Katniss Everdeen', 7),
+    ('Agent J', 9);
